@@ -32,7 +32,6 @@ function create() {
     simpson.body.collideWorldBounds = true;
 
     cursors = this.input.keyboard.createCursorKeys()
-    console.log(cursors)
 }
 
 function update() {
