@@ -1,6 +1,6 @@
 const config = {
-    width: 1000,
-    height: 500,
+    width: 1200,
+    height: 700,
     type: Phaser.AUTO,
     physics: {
         default: 'arcade',
@@ -20,17 +20,15 @@ let simpson
 let cursors
 
 function preload() {
-    this.load.spritesheet('space', './assets/images/space.png', {
-        frameWidth: 1000, frameHeight: 500});
+    this.load.spritesheet('space', './assets/images/space.jpg', {
+        frameWidth: 1200, frameHeight: 700});
     this.load.image('simpson', './assets/images/simpson.png')
 }
 
 
 function create() {
-    let space = this.add.image(400, 400, 'space').setScale(1);
-    // this.physics.world.collide.width / 2;
-    // this.physics.world.collide.height / 2;
-    simpson = this.physics.add.image(400, 400, 'simpson');
+    this.add.image(0, 0, 'space').setOrigin(0, 0);
+    simpson = this.physics.add.image(200, 200, 'simpson');
     simpson.body.collideWorldBounds = true;
 
     cursors = this.input.keyboard.createCursorKeys()
