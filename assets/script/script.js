@@ -1,11 +1,11 @@
 const config = {
-    width: 1200,
-    height: 700,
+    width: 1000,
+    height: 500,
     type: Phaser.AUTO,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 400}
+            gravity: { y: 400 }
         }
     },
     scene: {
@@ -20,21 +20,25 @@ let simpson
 let cursors
 
 function preload() {
-    this.load.image('space', './assets/images/space.png')
+    this.load.spritesheet('space', './assets/images/space.png', {
+        frameWidth: 1000, frameHeight: 500});
     this.load.image('simpson', './assets/images/simpson.png')
 }
 
+
 function create() {
-    this.add.image(500, 500, 'space');
-    simpson = this.physics.add.image(200, 200, 'simpson');
+    let space = this.add.image(400, 400, 'space').setScale(1);
+    // this.physics.world.collide.width / 2;
+    // this.physics.world.collide.height / 2;
+    simpson = this.physics.add.image(400, 400, 'simpson');
     simpson.body.collideWorldBounds = true;
-    
+
     cursors = this.input.keyboard.createCursorKeys()
     console.log(cursors)
 }
 
 function update() {
-    if(cursors.up.isDown) {
+    if (cursors.up.isDown) {
         simpson.setVelocity(0, -300)
     }
 }

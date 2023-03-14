@@ -1,0 +1,10 @@
+body {
+    width: 100%;
+    background-color: #e3cd26;
+
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+}
