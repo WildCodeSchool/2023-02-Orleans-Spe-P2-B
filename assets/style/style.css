@@ -2,7 +2,7 @@
                 
 body {
     width: 100%;
-    background-image: url('/assets/images/red.jpg');
+    background-image: url('../images/red.jpg');
     background-repeat: no-repeat;
     height: 100%;
     background-size: cover;
