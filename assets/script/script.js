@@ -15,7 +15,7 @@ const config = {
     }
 }
 
-let game = new Phaser.Game(config)
+const game = new Phaser.Game(config)
 let simpson
 let cursors
 
