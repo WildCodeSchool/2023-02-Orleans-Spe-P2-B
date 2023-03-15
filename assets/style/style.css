@@ -2,17 +2,58 @@
 
 body {
     width: 100%;
-    background-color: #000118;
+    background-image: url('/assets/images/red.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: cover;
     font-family: 'Ubuntu', sans-serif;
 }
 
 .title {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 90px;
     margin-bottom: 30px;
     color: rgb(249, 249, 49);
+    font-size: 3rem;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    margin: 400px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    color: rgb(6, 235, 251);
     font-size: 2rem;
+}
+
+.blue {
+    display: flex;
+    justify-content: center;
+    margin: 550px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    padding: 10px;
+    color: rgb(226, 6, 251);
+    background-color: rgb(228, 252, 247);
+    font-size: 2rem;
+}
+
+.welcome button {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    margin-left: 42%;
+    color: rgb(42, 186, 181);
+    background-color: rgb(225, 0, 255);
+    padding: 10px;
+    font-size: 2.5rem;
+    border-radius: 12%;
+    border: rgb(247, 39, 115);
+    opacity: 20;
+    filter: brightness(120%);
 }
 
 canvas {

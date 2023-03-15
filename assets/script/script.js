@@ -21,13 +21,16 @@ let cursors
 
 function preload() {
     this.load.spritesheet('space', './assets/images/space.jpg', {
-        frameWidth: 1200, frameHeight: 700});
+        frameWidth: 1200, frameHeight: 700
+    });
     this.load.image('simpson', './assets/images/simpson.png')
+    this.load.image('donut', './assets/images/donut.png',
+        { frameWidth: 50, frameHeight: 50 });
 }
-
 
 function create() {
     this.add.image(0, 0, 'space').setOrigin(0, 0);
+    this.add.image(300, 300, 'donut');
     simpson = this.physics.add.image(200, 200, 'simpson');
     simpson.body.collideWorldBounds = true;
 
