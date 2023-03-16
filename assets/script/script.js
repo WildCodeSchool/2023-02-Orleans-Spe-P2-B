@@ -49,7 +49,6 @@ function preload() {
     this.load.image('donut', './assets/images/donut.png')
     this.load.audio('wouhou', './assets/sounds/Wouhou.ogg')
     this.load.audio('music', './assets/sounds/music.ogg')
-
 }
 
 function create() {
@@ -65,13 +64,11 @@ function create() {
 
     cursors = this.input.keyboard.createCursorKeys()
     
-    
     donut = this.physics.add.group({
         key: 'donut',
         repeat: 8,
         setXY: { x: 200, y: 0, stepX: 100 }
     });
-    
     donut.children.iterate(function (child) {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
     });
@@ -85,7 +82,6 @@ function create() {
     
     this.musicSound = this.sound.add("music");
     this.wouhouSound = this.sound.add("wouhou");    
-    
     this.musicSound.play(musicConfig);
 }
 
