@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400, x: 200 }
+            gravity: { y: 400}
         }
     },
     scene: {
