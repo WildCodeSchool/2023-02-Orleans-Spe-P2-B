@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400 }
+            gravity: { y: 400, x: 200 }
         }
     },
     scene: {
@@ -38,6 +38,13 @@ function create() {
 }
 
 function update() {
+    if (cursors.left.isDown) {
+        simpson.setVelocityX(-200);
+    } else if (cursors.right.isDown) {
+        simpson.setVelocityX(200);
+    } else {
+        simpson.setVelocityX(0);
+    }
     if (cursors.up.isDown) {
         simpson.setVelocity(0, -300)
     }
