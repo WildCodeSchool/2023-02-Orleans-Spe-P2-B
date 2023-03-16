@@ -58,6 +58,9 @@ function update() {
         simpson.setVelocityX(0);
     }
     if (cursors.up.isDown) {
-        simpson.setVelocity(0, -300)
+        simpson.setVelocityY(-300)
+    }
+    if (cursors.down.isDown) {
+        simpson.setVelocityY(300)
     }
 }
