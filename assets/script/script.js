@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400, x: 200 }
+            gravity: { y: 400}
         }
     },
     scene: {
@@ -23,6 +23,7 @@ let score = 0;
 const game = new Phaser.Game(config)
 let simpson
 let cursors
+let asteroid1
 
 function preload() {
     this.load.spritesheet('space', './assets/images/space.jpg', {
@@ -32,11 +33,13 @@ function preload() {
     this.load.image('platform1', './assets/images/platform1.png')
     this.load.image('platform2', './assets/images/platform2.png')
     this.load.image('platform3', './assets/images/platform3.png')
+    this.load.image('asteroid1', './assets/images/asteroid1.png')
     this.load.image('donut', './assets/images/donut.png')
 }
 
 function create() {
     this.add.image(0, 0, 'space').setOrigin(0, 0);
+    // this.add.image(400, 200, 'asteroid1');
 
     platforms = this.physics.add.staticGroup();
     platforms.create(150, 500, 'platform2');
@@ -48,6 +51,10 @@ function create() {
 
     cursors = this.input.keyboard.createCursorKeys()
 
+    asteroid1 = this.physics.add.group();
+    this.physics.add.collider(asteroid1, platforms);
+    this.physics.add.collider(simpson, asteroid1, null, this);
+    
     donut = this.physics.add.group({
         key: 'donut',
         repeat: 8,
@@ -82,8 +89,26 @@ function update() {
     }
 }
 
+// function hitAsteroid(simpson, asteroid1) {
+//     this.physics.pause();
+//     simpson.setTint(0xff0000);
+//     // simpson.anims.play('turn');
+//     gameOver = true;
+// }
+
 function collectDonut(simpson, donut) {
     donut.disableBody(true, true);
     score += 1;
     scoreText.setText('Donuts : ' + score);
+
+    if (donut.countActive(true) === 0) {
+        donut.children.iterate(function (child) {
+            child.enableBody(true, child.x, 0, true, true);
+        });
+        // let x = (simpson.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+        let asteroid1 = asteroid1.create(0, 16, 'asteroid1');
+        asteroid1.setBounce(1);
+        asteroid1.setCollideWorldBounds(true);
+        asteroid1.setVelocityY(300);
+    }
 }
