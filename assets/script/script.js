@@ -121,7 +121,7 @@ function collectDonuts(simpson, donut) {
 
         let x = (simpson.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-        let asteroide = asteroides.create(x, 16, 'asteroides');
+        const asteroide = asteroides.create(x, 16, 'asteroides');
         asteroide.setBounce(1);
         asteroide.setCollideWorldBounds(true);
         asteroide.setVelocity(Phaser.Math.Between(-200, 200), 20);
