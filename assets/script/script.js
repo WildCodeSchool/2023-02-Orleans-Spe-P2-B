@@ -68,8 +68,8 @@ function create() {
 
     donuts = this.physics.add.group();
     for (let i = 0; i < 8; i++) {
-        let x = Phaser.Math.Between(0, game.config.width);
-        let y = Phaser.Math.Between(0, 300);
+        const x = Phaser.Math.Between(0, game.config.width);
+        const y = Phaser.Math.Between(0, 300);
         const donut = donuts.create(x, y, 'donuts');
         donut.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
         donut.body.collideWorldBounds = true;
@@ -116,8 +116,8 @@ function collectDonuts(simpson, donut) {
     if (donuts.countActive() === 0) {
 
         for (let i = 0; i < 8; i++) {
-            let x = Phaser.Math.Between(0, game.config.width);
-            let y = Phaser.Math.Between(0, 300);
+            const x = Phaser.Math.Between(0, game.config.width);
+            const y = Phaser.Math.Between(0, 300);
             const donut = donuts.create(x, y, 'donuts');
             donut.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
             donut.body.collideWorldBounds = true;
