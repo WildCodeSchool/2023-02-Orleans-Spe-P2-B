@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400}
+            gravity: { y: 400 }
         }
     },
     scene: {
@@ -66,14 +66,14 @@ function create() {
 
     cursors = this.input.keyboard.createCursorKeys()
 
-    donuts = this.physics.add.group({
-        key: 'donuts',
-        repeat: 8,
-        setXY: { x: 200, y: 0, stepX: 100 }
-    });
-    donuts.children.iterate(function (child) {
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
-    });
+    donuts = this.physics.add.group();
+    for (let i = 0; i < 8; i++) {
+        let x = Phaser.Math.Between(0, game.config.width);
+        let y = Phaser.Math.Between(0, 300);
+        const donut = donuts.create(x, y, 'donuts');
+        donut.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
+        donut.body.collideWorldBounds = true;
+    }
 
     asteroides = this.physics.add.group();
 
@@ -115,9 +115,13 @@ function collectDonuts(simpson, donut) {
 
     if (donuts.countActive() === 0) {
 
-        donuts.children.iterate(function (child) {
-            child.enableBody(true, child.x, 0, true, true);
-        });
+        for (let i = 0; i < 8; i++) {
+            let x = Phaser.Math.Between(0, game.config.width);
+            let y = Phaser.Math.Between(0, 300);
+            const donut = donuts.create(x, y, 'donuts');
+            donut.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
+            donut.body.collideWorldBounds = true;
+        }
 
         let x = (simpson.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
