@@ -17,7 +17,8 @@ const config = {
 
 
 let platforms;
-let donut;
+let asteroides;
+let donuts;
 let score = 0;
 
 const game = new Phaser.Game(config)
@@ -46,7 +47,8 @@ function preload() {
     this.load.image('platform1', './assets/images/platform1.png')
     this.load.image('platform2', './assets/images/platform2.png')
     this.load.image('platform3', './assets/images/platform3.png')
-    this.load.image('donut', './assets/images/donut.png')
+    this.load.image('asteroides', './assets/images/asteroid.png')
+    this.load.image('donuts', './assets/images/donut.png')
     this.load.audio('wouhou', './assets/sounds/Wouhou.ogg')
     this.load.audio('music', './assets/sounds/music.ogg')
 }
@@ -63,25 +65,29 @@ function create() {
     simpson.body.collideWorldBounds = true;
 
     cursors = this.input.keyboard.createCursorKeys()
-    
-    donut = this.physics.add.group({
-        key: 'donut',
+
+    donuts = this.physics.add.group({
+        key: 'donuts',
         repeat: 8,
         setXY: { x: 200, y: 0, stepX: 100 }
     });
-    donut.children.iterate(function (child) {
+    donuts.children.iterate(function (child) {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
     });
-    
+
+    asteroides = this.physics.add.group();
+
     scoreText = this.add.text(16, 16, 'Donut : 0', { font: '32px Simpsonfont', fill: '#f9f931' });
-    
+
     this.physics.add.collider(simpson, platforms);
-    this.physics.add.collider(donut, platforms);
-    
-    this.physics.add.overlap(simpson, donut, collectDonut, null, this);
-    
+    this.physics.add.collider(donuts, platforms);
+    this.physics.add.collider(asteroides, platforms);
+
+
+    this.physics.add.overlap(simpson, donuts, collectDonuts, null, this);
+
     this.musicSound = this.sound.add("music");
-    this.wouhouSound = this.sound.add("wouhou");    
+    this.wouhouSound = this.sound.add("wouhou");
     this.musicSound.play(musicConfig);
 }
 
@@ -101,9 +107,23 @@ function update() {
     }
 }
 
-function collectDonut(simpson, donut) {
+function collectDonuts(simpson, donut) {
     donut.disableBody(true, true);
-    this.wouhouSound.play(wouhouConfig);
+    this.wouhouSound.play(soundConfig);
     score += 1;
     scoreText.setText('Donuts : ' + score);
+
+    if (donuts.countActive() === 0) {
+
+        donuts.children.iterate(function (child) {
+            child.enableBody(true, child.x, 0, true, true);
+        });
+
+        let x = (simpson.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+        const asteroide = asteroides.create(x, 16, 'asteroides');
+        asteroide.setBounce(1);
+        asteroide.setCollideWorldBounds(true);
+        asteroide.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    }
 }
