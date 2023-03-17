@@ -24,6 +24,20 @@ const game = new Phaser.Game(config)
 let simpson
 let cursors
 
+const musicConfig = {
+    mute: false,
+    detune: 0,
+    loop: true,
+    delay: 0,
+}
+
+const soundConfig = {
+    mute: false,
+    detune: 0,
+    loop: false,
+    delay: 0,
+}
+
 function preload() {
     this.load.spritesheet('space', './assets/images/space.jpg', {
         frameWidth: 1200, frameHeight: 700
@@ -33,6 +47,8 @@ function preload() {
     this.load.image('platform2', './assets/images/platform2.png')
     this.load.image('platform3', './assets/images/platform3.png')
     this.load.image('donut', './assets/images/donut.png')
+    this.load.audio('wouhou', './assets/sounds/Wouhou.ogg')
+    this.load.audio('music', './assets/sounds/music.ogg')
 }
 
 function create() {
@@ -47,23 +63,26 @@ function create() {
     simpson.body.collideWorldBounds = true;
 
     cursors = this.input.keyboard.createCursorKeys()
-
+    
     donut = this.physics.add.group({
         key: 'donut',
         repeat: 8,
         setXY: { x: 200, y: 0, stepX: 100 }
     });
-
     donut.children.iterate(function (child) {
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
     });
-
+    
     scoreText = this.add.text(16, 16, 'Donut : 0', { font: '32px Simpsonfont', fill: '#f9f931' });
-
+    
     this.physics.add.collider(simpson, platforms);
     this.physics.add.collider(donut, platforms);
-
+    
     this.physics.add.overlap(simpson, donut, collectDonut, null, this);
+    
+    this.musicSound = this.sound.add("music");
+    this.wouhouSound = this.sound.add("wouhou");    
+    this.musicSound.play(musicConfig);
 }
 
 function update() {
@@ -84,6 +103,7 @@ function update() {
 
 function collectDonut(simpson, donut) {
     donut.disableBody(true, true);
+    this.wouhouSound.play(wouhouConfig);
     score += 1;
     scoreText.setText('Donuts : ' + score);
 }
