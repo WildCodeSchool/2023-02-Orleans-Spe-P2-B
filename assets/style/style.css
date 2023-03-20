@@ -1,0 +1,68 @@
+@import url('https://fonts.cdnfonts.com/css/simpsonfont');
+                
+body {
+    background-image: url('../images/red.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: cover;
+    font-family: 'Akbar', sans-serif;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+    margin-bottom: 30px;
+    color: rgb(249, 249, 49);
+    font-size: 3rem;
+    font-family: 'Simpsonfont', sans-serif;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 400px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    color: rgb(6, 235, 251);
+    font-size: 2rem;
+    word-spacing: 0.8em;
+    font-family: 'Akbar', sans-serif;
+}
+
+.blue {
+    display: flex;
+    justify-content: center;
+    margin: 300px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    padding: 10px;
+    color: rgb(226, 6, 251);
+    background-color: rgb(228, 252, 247);
+    font-size: 2rem;
+    border-radius: 40%;
+}
+
+.welcome button {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    margin-left: 40%;
+    color: rgb(42, 187, 182);
+    background-color: rgb(225, 0, 255);
+    padding: 40px;
+    font-size: 2.5rem;
+    border-radius: 50%;
+    border: rgb(231, 29, 79);
+    opacity: 20;
+    filter: brightness(120%);
+    font-family: 'Akbar', sans-serif;
+}
+
+canvas {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
