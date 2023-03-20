@@ -61,7 +61,7 @@ function create() {
     platforms = this.physics.add.staticGroup();
     platforms.create(150, 500, 'platform2');
     platforms.create(600, 200, 'platform3');
-    platforms.create(1000, 400, 'platform1');
+    platforms.create(1000, 450, 'platform1');
 
     simpson = this.physics.add.image(200, 200, 'simpson');
     simpson.body.collideWorldBounds = true;
