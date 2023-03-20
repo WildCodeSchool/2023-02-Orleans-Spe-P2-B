@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400}
+            gravity: { y: 400 }
         }
     },
     scene: {
@@ -20,7 +20,6 @@ let platforms;
 let asteroides;
 let donuts;
 let score = 0;
-// let asteroid;
 let life = 3;
 let lifeText;
 
@@ -86,26 +85,11 @@ function create() {
     this.physics.add.collider(donuts, platforms);
     this.physics.add.collider(asteroides, platforms);
     this.physics.add.overlap(simpson, donuts, collectDonuts, null, this);
-    this.physics.add.collider(simpson, asteroides, hitAsteroides,  null, this);
+    this.physics.add.collider(simpson, asteroides, hitAsteroides, null, this);
 
     this.musicSound = this.sound.add("music");
     this.wouhouSound = this.sound.add("wouhou");
     this.musicSound.play(musicConfig);
-
-    // restartBtn =this.add.sprite(800, 200, 'restartBtn')
-    // restartBtn.setInteractive()
-    // restartBtn.on('hitAsteroid', function() {
-    //     if(gameOver === true) {
-    //         gameOver=false
-    //         score=0
-    //         currentScore.setText('Donut : '+score)
-    //         restartBtn.x+=400
-    //         restartBtnWord.x+=400
-    //     }
-    // })
-    // restartBtn.depth = 10
-    // restartBtnWord = this.add.text(400, 400, 'Restart', { font: '52px Simpsonfont', fill: '#2abab5' })
-    // restartBtnWord.depth = 10
 }
 
 function update() {
@@ -124,11 +108,11 @@ function update() {
     }
 }
 
-function hitAsteroides (simpson, asteroides) {
+function hitAsteroides(simpson, asteroides) {
     simpson.y = -0
     life -= 1
     lifeText.setText('Vie : ' + life);
-    if(life === 0) {
+    if (life === 0) {
         gameOver = this.add.text(500, 300, 'Game Over !!!', { font: '52px Simpsonfont', fill: '#e81e50' })
         simpson.disableBody(true, true)
     }
