@@ -125,6 +125,7 @@ function hitAsteroides(simpson) {
         button.on('pointerup', openExternalLink, this);
         simpson.disableBody(true, true)
         this.gameOverSound.play(soundConfig);
+        life = 3;
     }
 }
 
