@@ -96,8 +96,6 @@ function create() {
     this.gameOverSound = this.sound.add("gameOver");
     this.touchAsteroidSound = this.sound.add("touchAsteroid");
     this.musicSound.play(musicConfig);
-
-
 }
 
 function update() {
@@ -154,7 +152,6 @@ function collectDonuts(simpson, donut) {
 
 function openExternalLink() {
     const s =  this.scene.restart();
-
     if (s) {
         s.focus();
     }
