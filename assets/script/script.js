@@ -20,6 +20,9 @@ let platforms;
 let asteroides;
 let donuts;
 let score = 0;
+// let asteroid;
+let life = 3;
+let lifeText;
 
 const game = new Phaser.Game(config)
 let simpson
@@ -76,19 +79,33 @@ function create() {
     });
 
     asteroides = this.physics.add.group();
-
     scoreText = this.add.text(16, 16, 'Donut : 0', { font: '32px Simpsonfont', fill: '#f9f931' });
+    lifeText = this.add.text(16, 55, 'Vie : 3', { font: '32px Simpsonfont', fill: '#e100ff' });
 
     this.physics.add.collider(simpson, platforms);
     this.physics.add.collider(donuts, platforms);
     this.physics.add.collider(asteroides, platforms);
-
-
     this.physics.add.overlap(simpson, donuts, collectDonuts, null, this);
+    this.physics.add.collider(simpson, asteroides, hitAsteroides,  null, this);
 
     this.musicSound = this.sound.add("music");
     this.wouhouSound = this.sound.add("wouhou");
     this.musicSound.play(musicConfig);
+
+    // restartBtn =this.add.sprite(800, 200, 'restartBtn')
+    // restartBtn.setInteractive()
+    // restartBtn.on('hitAsteroid', function() {
+    //     if(gameOver === true) {
+    //         gameOver=false
+    //         score=0
+    //         currentScore.setText('Donut : '+score)
+    //         restartBtn.x+=400
+    //         restartBtnWord.x+=400
+    //     }
+    // })
+    // restartBtn.depth = 10
+    // restartBtnWord = this.add.text(400, 400, 'Restart', { font: '52px Simpsonfont', fill: '#2abab5' })
+    // restartBtnWord.depth = 10
 }
 
 function update() {
@@ -107,6 +124,16 @@ function update() {
     }
 }
 
+function hitAsteroides (simpson, asteroides) {
+    simpson.y = -0
+    life -= 1
+    lifeText.setText('Vie : ' + life);
+    if(life === 0) {
+        gameOver = this.add.text(500, 300, 'Game Over !!!', { font: '52px Simpsonfont', fill: '#e81e50' })
+        simpson.disableBody(true, true)
+    }
+}
+
 function collectDonuts(simpson, donut) {
     donut.disableBody(true, true);
     this.wouhouSound.play(soundConfig);
@@ -114,13 +141,10 @@ function collectDonuts(simpson, donut) {
     scoreText.setText('Donuts : ' + score);
 
     if (donuts.countActive() === 0) {
-
         donuts.children.iterate(function (child) {
             child.enableBody(true, child.x, 0, true, true);
         });
-
         let x = (simpson.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
         const asteroide = asteroides.create(x, 16, 'asteroides');
         asteroide.setBounce(1);
         asteroide.setCollideWorldBounds(true);

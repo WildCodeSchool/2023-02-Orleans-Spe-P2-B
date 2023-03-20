@@ -50,12 +50,12 @@ body {
     margin-top: 80px;
     margin-bottom: 30px;
     margin-left: 40%;
-    color: rgb(42, 186, 181);
-    background-color: rgb(225, 0, 255);
+    color: hsl(178, 63%, 45%);
+    background-color: hsl(293, 100%, 50%);
     padding: 40px;
     font-size: 2.5rem;
     border-radius: 50%;
-    border: rgb(247, 39, 115);
+    border: hsl(345, 81%, 51%);
     opacity: 20;
     filter: brightness(120%);
     font-family: 'Akbar', sans-serif;
