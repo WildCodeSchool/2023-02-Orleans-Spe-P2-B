@@ -5,7 +5,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 400}
+            gravity: { y: 400 }
         }
     },
     scene: {
@@ -29,6 +29,7 @@ let cursors
 
 const musicConfig = {
     mute: false,
+    volume: 1,
     detune: 0,
     loop: true,
     delay: 0,
@@ -36,6 +37,7 @@ const musicConfig = {
 
 const soundConfig = {
     mute: false,
+    volume: 3,
     detune: 0,
     loop: false,
     delay: 0,
@@ -53,6 +55,8 @@ function preload() {
     this.load.image('donuts', './assets/images/donut.png')
     this.load.audio('wouhou', './assets/sounds/Wouhou.ogg')
     this.load.audio('music', './assets/sounds/music.ogg')
+    this.load.audio('gameOver', './assets/sounds/gameOver.ogg')
+    this.load.audio('touchAsteroid', './assets/sounds/Asteroid.ogg')
 }
 
 function create() {
@@ -89,6 +93,8 @@ function create() {
 
     this.musicSound = this.sound.add("music");
     this.wouhouSound = this.sound.add("wouhou");
+    this.gameOverSound = this.sound.add("gameOver");
+    this.touchAsteroidSound = this.sound.add("touchAsteroid");
     this.musicSound.play(musicConfig);
 }
 
@@ -108,13 +114,15 @@ function update() {
     }
 }
 
-function hitAsteroides(simpson, asteroides) {
+function hitAsteroides(simpson) {
+    this.touchAsteroidSound.play(soundConfig);
     simpson.y = -0
     life -= 1
     lifeText.setText('Vie : ' + life);
     if (life === 0) {
         gameOver = this.add.text(500, 300, 'Game Over !!!', { font: '52px Simpsonfont', fill: '#e81e50' })
         simpson.disableBody(true, true)
+        this.gameOverSound.play(soundConfig);
     }
 }
 
