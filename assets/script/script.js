@@ -120,7 +120,9 @@ function hitAsteroides(simpson) {
     life -= 1
     lifeText.setText('Vie : ' + life);
     if (life === 0) {
-        gameOver = this.add.text(500, 300, 'Game Over !!!', { font: '52px Simpsonfont', fill: '#e81e50' })
+        gameOver = this.add.text(450, 300, 'Game Over !!!', { font: '52px Simpsonfont', fill: '#e81e50' })
+        const button = this.add.text(500, 400, 'Recommencer', { font: '32px Simpsonfont', fill: '#f9f931' }).setInteractive();
+        button.on('pointerup', openExternalLink, this);
         simpson.disableBody(true, true)
         this.gameOverSound.play(soundConfig);
     }
@@ -145,5 +147,12 @@ function collectDonuts(simpson, donut) {
         asteroide.setBounce(1);
         asteroide.setCollideWorldBounds(true);
         asteroide.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    }
+}
+
+function openExternalLink() {
+    const s =  this.scene.restart();
+    if (s) {
+        s.focus();
     }
 }
